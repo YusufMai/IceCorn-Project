@@ -1,0 +1,88 @@
+import java.awt.*;
+import java.awt.event.*;
+
+ class Calculator1 extends Frame implements ActionListener {
+
+Button b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b_dec, b_add, b_sub, b_mul,
+b_div, b_eq, b_per, b_frac, b_sroot, b_pm, b_dir, b_Mplus,
+b_Mminus, b_C, b_CE, b_MS, b_MC, b_MR;
+TextField t;
+MenuBar mb;
+Menu view, edit, help;
+MenuItem std, sci, prog, stat, copy, paste, his, vh, abt_calc;
+Panel p1, p2, p3, p4, p5, p6, p7, p8, mp;
+float a, b, c;
+float d;
+char op;
+Font f;
+int flag = 0;
+
+Calculator1() {
+
+f = new Font("verdana", 3, 30);
+mb = new MenuBar();
+setMenuBar(mb);
+view = new Menu("View");
+edit = new Menu("Edit");
+help = new Menu("Help");
+std = new MenuItem("Standard");
+sci = new MenuItem("Scientific");
+prog = new MenuItem("Programmer");
+stat = new MenuItem("Statistics");
+
+view.add(std);
+view.add(sci);
+view.add(prog);
+view.add(stat);
+mb.add(view);
+
+copy = new MenuItem("Copy");
+paste = new MenuItem("Paste");
+his = new MenuItem("History");
+
+edit.add(copy);
+edit.add(paste);
+edit.add(his);
+mb.add(edit);
+
+vh = new MenuItem("View Help");
+abt_calc = new MenuItem("About Calculator");
+help.add(vh);
+help.add(abt_calc);
+mb.add(help);
+
+b1 = new Button("1");
+b2 = new Button("2");
+b3 = new Button("3");
+b4 = new Button("4");
+b5 = new Button("5");
+b6 = new Button("6");
+b7 = new Button("7");
+b8 = new Button("8");
+b9 = new Button("9");
+b10 = new Button("0");
+
+b_dec = new Button(".");
+b_add = new Button("+");
+b_sub = new Button("-");
+b_mul = new Button("*");
+b_div = new Button("/");
+b_eq = new Button("=");
+b_per = new Button("%");
+b_frac = new Button("1/x");
+b_sroot = new Button(" root");
+b_pm = new Button(" + -");
+b_C = new Button("C");
+b_CE = new Button("CE");
+b_dir = new Button(" < --"); b_MC = new Button("MC "); b_MR = new Button("MR "); b_MS = new Button("MS "); b_Mplus = new Button("M+"); b_Mminus = new Button("M-"); t = new TextField(30); t.setFont(f); p1 = new Panel(); p1.add(t); p2 = new Panel(new GridLayout(1, 5, 8, 8)); p2.add(b_MC); p2.add(b_MR); p2.add(b_MS); p2.add(b_Mplus); p2.add(b_Mminus); p3 = new Panel(new GridLayout(1, 5)); p3.add(b_dir); p3.add(b_CE); p3.add(b_C); p3.add(b_pm); p3.add(b_sroot); p4 = new Panel(new GridLayout(1, 5)); p4.add(b7); p4.add(b8); p4.add(b9); p4.add(b_div); p4.add(b_per); p5 = new Panel(new GridLayout(1, 5)); p5.add(b4); p5.add(b5); p5.add(b6); p5.add(b_mul); p5.add(b_frac); p6 = new Panel(new GridLayout(1, 5)); p6.add(b1); p6.add(b2); p6.add(b3); p6.add(b_sub); p6.add(b_eq); p7 = new Panel(new GridLayout(1, 3)); p7.add(b10); p7.add(b_dec); p7.add(b_add); mp = new Panel(new GridLayout(7, 1)); mp.add(p1); mp.add(p2); mp.add(p3); mp.add(p4); mp.add(p5); mp.add(p6); mp.add(p7); add(mp); setTitle("Yusuf Mai First Calculator"); setBounds(200, 200, 550, 400); setResizable(false); setVisible(true); b1.addActionListener(this); b2.addActionListener(this); b1.addActionListener(this); b_Mminus.addActionListener(this); b_Mplus.addActionListener(this); b_MR.addActionListener(this); b_pm.addActionListener(this); b_MC.addActionListener(this); b_MS.addActionListener(this); b_add.addActionListener(this); b_eq.addActionListener(this); b3.addActionListener(this); b4.addActionListener(this); b5.addActionListener(this); b6.addActionListener(this); b_dir.addActionListener(this); b7.addActionListener(this); b8.addActionListener(this); b9.addActionListener(this); b10.addActionListener(this); b_sroot.addActionListener(this); b_mul.addActionListener(this); b_div.addActionListener(this); b_sub.addActionListener(this); b_C.addActionListener(this); b_CE.addActionListener(this); b_dec.addActionListener(this); b_frac.addActionListener(this); } public void setNum(int n) { t.setText(t.getText() + n); } public void actionPerformed(ActionEvent ae) { if (ae.getSource() == b1) { setNum(1); } if (ae.getSource() == b_CE) { t.setText(""); } if (ae.getSource() == b_dec) { if (flag == 0) { t.setText(t.getText() + '.'); flag = 1; } } if (ae.getSource() == b_dir) { String s = t.getText(); String s1 = s.substring(0, s.length() - 1); t.setText("" + s1); } if (ae.getSource() == b_MC) { d = 0; t.setText(""); flag = 0; } if (ae.getSource() == b_pm) { a = Float.parseFloat(t.getText()); b = a * (-1); t.setText("" + b); } if (ae.getSource() == b_MS) { d = Float.parseFloat(t.getText()); t.setText(""); flag = 0; } if (ae.getSource() == b_MR) { flag = 0; t.setText("" + d); } if (ae.getSource() == b_Mplus) { flag = 0; a = Float.parseFloat(t.getText()); a = a + d; t.setText("" + a); } if (ae.getSource() == b_Mminus) { flag = 0; a = Float.parseFloat(t.getText()); a = d - a; t.setText("" + a); } if (ae.getSource() == b_frac) { flag = 0; a = Float.parseFloat(t.getText()); t.setText("" + (1 / a)); } if (ae.getSource() == b_C) { flag = 0; b = 0; t.setText(""); } if (ae.getSource() == b2) { setNum(2); } if (ae.getSource() == b3) { setNum(3); } if (ae.getSource() == b4) { setNum(4); } if (ae.getSource() == b5) { setNum(5); } if (ae.getSource() == b6) { setNum(6); } if (ae.getSource() == b7) { setNum(7); } if (ae.getSource() == b8) { setNum(8); } if (ae.getSource() == b9) { setNum(9); } if (ae.getSource() == b10) { setNum(0); } if (ae.getSource() == b_sroot) { op = '#'; flag = 0; } if (ae.getSource() == b_add) { flag = 0; a = Float.parseFloat(t.getText()); op = '+'; t.setText(""); } if (ae.getSource() == b_mul) { flag = 0; a = Float.parseFloat(t.getText()); op = '*'; t.setText(""); } if (ae.getSource() == b_div) { flag = 0; a = Float.parseFloat(t.getText()); op = '/'; t.setText(""); } if (ae.getSource() == b_sub) { flag = 0; a = Float.parseFloat(t.getText()); op = '-'; t.setText(""); } if (ae.getSource() == b_sroot) { flag = 0; a = Float.parseFloat(t.getText()); t.setText("" + Math.sqrt(a)); } if (ae.getSource() == b_eq) { b = Float.parseFloat(t.getText()); t.setText(""); switch (op) { case '+': c = a + b; t.setText("" + c); break; case '-': c = a - b; t.setText("" + c); break; case '*': c = a * b; t.setText("" + c); break; case '/': c = a / b; t.setText("" + c); break; } } }
+public static void main(String args[]) { 
+
+new Calculator1(); 
+
+
+
+} 
+
+
+
+} 
